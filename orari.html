@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+  <style type="text/css">
+    html {
+      font-family: sans-serif;
+    }
+
+    .timetable {
+      min-width: 480px;
+      max-width: 800px;
+      display: grid;
+      grid-template-columns: 1fr repeat(3, 4fr);
+      grid-template-rows: repeat(17, minmax(80px, 1fr));
+      grid-gap: 6px;
+      border-right: solid 1px rgba(0,0,0,0.2);
+    }
+
+    .table-row {
+      grid-column: 1 / -1;
+      border-top: solid 1px rgba(0,0,0,0.2);
+      z-index: -1000;
+      position: relative;
+      top: -3px;
+    }
+
+    .table-column {
+      grid-row: 1 / -1;
+      border-left: solid 1px rgba(0,0,0,0.2);
+      position: relative;
+      left: -3px;
+      z-index: -1000;
+    }
+
+    .timestamp {
+      grid-column: 1;
+      background: white;
+      padding-right: 8px;
+      color: gray;
+      position: relative;
+      top: -11px;
+      z-index: -999;
+    }
+
+    .title {
+      grid-row: 1;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+    }
+
+    .placeholder {
+      grid-column: 1;
+      grid-row: 1;
+      width: 1px;
+      height: 1px;
+    }
+
+    .timebox {
+      padding: 12px;
+      padding-top: 16px;
+      border-radius: 8px;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      font-size: 14pt;
+    }
+
+    .first_year {
+      grid-column: 2 / 3;
+    }
+
+    .second_year {
+      grid-column: 3 / 4;
+    }
+
+    .third_year {
+      grid-column: 4 / 5;
+    }
+
+    .start_15 {
+      margin-top: 20px;
+    }
+
+    .start_30 {
+      margin-top: 40px;
+    }
+
+    .start_45 {
+      margin-top: 60px;
+    }
+
+    .end_15 {
+      margin-bottom: 60px;
+    }
+
+    .end_30 {
+      margin-bottom: 40px;
+    }
+
+    .end_45 {
+      margin-bottom: 20px;
+    }
+/*    
+palette https://coolors.co/palette/003049-d62828-f77f00-fcbf49-eae2b7
+*/  
+    .analisi {
+      background: rgba(214, 40, 40, 0.7);
+      border: solid 2px rgb(214, 40, 40);
+      color: white;
+    }
+
+    .mdp {
+      background: #F77F00;
+    }
+
+    .reti2 {
+      background: #FCBF49;
+    }
+
+    .embedded {
+      background: #003049;
+      color: white;
+    }
+
+    .sweng{
+      background: #EAE2B7;
+    } 
+
+    .cg {
+      background: rgba(229, 229, 229, 0.7);
+      border: solid 2px rgba(0, 0, 0, 0.8);
+    } 
+  </style>
+</head>
+<body>
+  <div class="timetable">    
+    <div class="placeholder"></div>
+    <div class="title" style="grid-column: 2 / span 1;">I anno</div>
+    <div class="title" style="grid-column: 3 / span 1;">II anno</div>
+    <div class="title" style="grid-column: 4 / span 1;">III anno</div>
+    <div class="table-column" style="grid-column: 2 / span 1;"></div>
+    <div class="table-column" style="grid-column: 3 / span 1;"></div>
+    <div class="table-column" style="grid-column: 4 / span 1;"></div>
+    <div class="table-row" style="grid-row: 2 / span 1">
+      <span class="timestamp">08:00</span>
+    </div>
+    <div class="table-row" style="grid-row: 3 / span 1">
+      <span class="timestamp">09:00</span>
+    </div>
+    <div class="table-row" style="grid-row: 4 / span 1">
+      <span class="timestamp">10:00</span>
+    </div>
+    <div class="table-row" style="grid-row: 5 / span 1">
+      <span class="timestamp">11:00</span>
+    </div>
+    <div class="table-row" style="grid-row: 6 / span 1">
+      <span class="timestamp">12:00</span>
+    </div>
+    <div class="table-row" style="grid-row: 7 / span 1">
+      <span class="timestamp">13:00</span>
+    </div>
+    <div class="table-row" style="grid-row: 8 / span 1">
+      <span class="timestamp">14:00</span>
+    </div>
+    <div class="table-row" style="grid-row: 9 / span 1">
+      <span class="timestamp">15:00</span>
+    </div>
+    <div class="table-row" style="grid-row: 10 / span 1">
+      <span class="timestamp">16:00</span>
+    </div>
+    <div class="table-row" style="grid-row: 11 / span 1">
+      <span class="timestamp">17:00</span>
+    </div>
+    <div class="table-row" style="grid-row: 12 / span 1">
+      <span class="timestamp">18:00</span>
+    </div>
+    <div class="table-row" style="grid-row: 13 / span 1">
+      <span class="timestamp">19:00</span>
+    </div>
+    <div class="table-row" style="grid-row: 14 / span 1">
+      <span class="timestamp">20:00</span>
+    </div>
+    <div class="table-row" style="grid-row: 15 / span 1">
+      <span class="timestamp">21:00</span>
+    </div>
+    <div class="table-row" style="grid-row: 16 / span 1">
+      <span class="timestamp">22:00</span>
+    </div>
+  </div>
+  <script>
+    function getColumnClassNameFromYear(year) {
+      console.log('year = ' + year);
+      switch (year) {
+        case 1: {
+          return 'first_year';
+        }
+        case 2: {
+          return 'second_year';
+        }
+        case 3: {
+          return 'third_year';
+        }
+        default: {
+          return 'column_class_error';
+        }
+      }
+    }
+
+    function getYearFromLectureCode(lecture_code) {
+      const dict = {
+        '00013': 1, // analisi
+        '77776': 2, // MDP
+        '09032': 3, // SWEng
+        '70218': 3, // reti 2
+        '41731': 3, // tec web
+        '70227': 3, // diritto
+        '72778': 3, // hpc
+        '77780': 3, // embedded 
+        '70090': 3, // cg
+      }
+      return dict[lecture_code];
+    }
+
+    function makeTimeBox(lecture_json) {
+      let start = lecture_json['time'].split('-')[0].trimEnd();
+      let end = lecture_json['time'].split('-')[1].trimStart();
+      let name = lecture_json['title'].split('/')[0].trimEnd();
+      let hall = lecture_json['aule'].map(aula => aula['des_edificio']).join(' ');
+      let year = getYearFromLectureCode(lecture_json['cod_modulo'].split('_')[0]);
+
+
+      let timetable = document.getElementsByClassName('timetable')[0];
+      if (timetable == null) {
+        console.log('Error: timetable not found');
+      }
+
+      let timebox = document.createElement('div');      
+      timebox.classList.add('timebox');
+      timebox.classList.add(getColumnClassNameFromYear(year));
+
+      let minutes_start = parseInt(start.split(':')[1]);
+
+      timebox.style.gridRowStart = String(start.split(':')[0] - 6);
+      if (minutes_start >= 8 && minutes_start <= 22) {
+        timebox.classList.add('start_15');
+      } else if (minutes_start > 22 && minutes_start <= 37) {
+        timebox.classList.add('start_30');
+      } else if (minutes_start > 37) {
+        timebox.classList.add('start_45');
+      }
+
+      let minutes_end = parseInt(end.split(':')[1]);
+
+      if (minutes_end >= 8) {
+        timebox.style.gridRowEnd = String(end.split(':')[0] - 5);
+
+        if (minutes_end <= 22) {
+          timebox.classList.add('end_15');
+        } else if (minutes_end <= 37) {
+          timebox.classList.add('end_30');
+        } else {
+          timebox.classList.add('end_45');
+        }
+      } else {
+        timebox.style.gridRowEnd = String(end.split(':')[0] - 6);
+      }
+
+      name = name.split('/')[0].trimEnd().toLowerCase();
+      switch(name) {
+        case 'analisi matematica': {
+          timebox.classList.add('analisi');
+          break;
+        }
+        case 'matematica discreta e probabilità': {
+          timebox.classList.add('mdp');
+          break;
+        }
+        case 'ingegneria del software': {
+          timebox.classList.add('sweng');
+          break;
+        }
+        case 'sistemi embedded e internet-of-things': {
+          timebox.classList.add('embedded');
+          break;
+        }
+        case 'reti di telecomunicazione': {
+          timebox.classList.add('reti2');
+          break;
+        }
+        case 'computer graphics': {
+          timebox.classList.add('cg');
+          break;
+        }
+      }
+
+      let lecture_title = document.createElement('span');
+      lecture_title.innerText = name.toLowerCase().replace(/(^.|\s+.)/g, m => m.toUpperCase());
+      lecture_title.style.marginBottom = '12px';
+
+      let lecture_time = document.createElement('span');
+      lecture_time.innerText = start + ' - ' + end;
+      lecture_time.style.marginBottom = '4px';
+
+      let lecture_hall = document.createElement('span');
+      lecture_hall.innerText = hall;
+
+      timebox.appendChild(lecture_title);
+      timebox.appendChild(lecture_time);
+      timebox.appendChild(lecture_hall);
+
+      timetable.appendChild(timebox);
+    }
+
+    function test() {
+      makeTimeBox(1, '09:00', '11:00', 'Analisi Matematica', '2.12');
+      makeTimeBox(2, '09:00', '11:00', 'matematica discreta e probabilità', '2.12');
+      makeTimeBox(3, '09:00', '11:00', 'sistemi embedded e internet-of-things', '2.12');
+      makeTimeBox(3, '14:00', '16:00', 'reti di telecomunicazione', '2.12');
+      makeTimeBox(3, '11:00', '14:00', 'ingegneria del software', '2.12');
+    }
+
+    function filterLectures(lecture) {
+      // lecture codes are in form
+      // "CODE_X"
+      // where X is an extra numerical identifier, for example OOP has '70219_1', '70219_2', '70219_3'
+      // we can remove it to keep it simpler
+      const deny_lectures_codes = [
+      '00819', // programmazione
+      '08574', // sistemi operativi
+      '70219', // OOP
+      '41731', // tec web
+      '70227', // diritto
+      '72778', // hpc
+      ];
+      return !deny_lectures_codes.includes(lecture['cod_modulo'].split('_')[0]);
+    }
+
+    function handleResponse(json) {
+      json.filter(filterLectures).forEach(makeTimeBox);
+    }
+
+    function fetchOrari(year, start, end) {
+      let url = `https://corsi.unibo.it/laurea/IngegneriaScienzeInformatiche/orario-lezioni/@@orario_reale_json?anno=${year}&curricula=&start=${start}&end=${end}`;
+
+      fetch(url, {
+        "headers": {
+          "accept": "application/json, text/javascript, */*; q=0.01",
+          "accept-language": "it-IT,it;q=0.9,en-US;q=0.8,en;q=0.7",
+          "sec-fetch-mode": "cors",
+        },
+        "body": null,
+        "method": "GET",
+      }).then(res => res.json()).then(data => handleResponse(data));
+    }
+
+    fetchOrari(1, '2022-10-03', '2022-10-03');
+    fetchOrari(2, '2022-10-03', '2022-10-03');
+    fetchOrari(3, '2022-10-03', '2022-10-03');
+  </script>
+</body>
+</html>
