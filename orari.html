@@ -90,6 +90,21 @@
       display: flex;
       flex-direction: column;
       font-size: 14pt;
+      overflow-wrap: break-word;
+    }
+
+    .lecture_title {
+      margin-bottom: 12px;
+      overflow-wrap: break-word;
+    }
+
+    .lecture_time {
+      margin-bottom: 4px;
+      overflow-wrap: break-word;
+    }
+
+    .lecture_hall {
+      overflow-wrap: break-word;
     }
 
     .first_year {
@@ -323,14 +338,18 @@ palette https://coolors.co/palette/003049-d62828-f77f00-fcbf49-eae2b7
 
       let lecture_title = document.createElement('span');
       lecture_title.innerText = name.toLowerCase().replace(/(^.|\s+.)/g, m => m.toUpperCase());
-      lecture_title.style.marginBottom = '12px';
+      lecture_title.classList.add('lecture_title');
+      if (lecture_title.innerText == "Reti Di Telecomunicazione") {
+        lecture_title.innerText = lecture_title.innerText.slice(0, 17);
+      }
 
       let lecture_time = document.createElement('span');
       lecture_time.innerText = start + ' - ' + end;
-      lecture_time.style.marginBottom = '4px';
+      lecture_time.classList.add('lecture_time');
 
       let lecture_hall = document.createElement('span');
       lecture_hall.innerText = hall;
+      lecture_hall.classList.add('lecture_hall');
 
       timebox.appendChild(lecture_title);
       timebox.appendChild(lecture_time);
@@ -381,14 +400,29 @@ palette https://coolors.co/palette/003049-d62828-f77f00-fcbf49-eae2b7
       }).then(res => res.json()).then(data => handleResponse(data));
     }
 
+    function getWeekdayString(day) {
+      const n =['Domenica', 'Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato'];
+      if (day >= 0 && day <= 6) 
+        return n[day];
+      return '';
+    }
+
     function loadNewDate() {
       document.querySelectorAll(".timebox").forEach(el => el.remove());
+
+      let displayDate = [
+        getWeekdayString(date.getDay()),
+        String(date.getDate()),
+        String(new Intl.DateTimeFormat('it-IT', {month: 'long'}).format(date))z,
+        String(date.getFullYear())
+      ].join(' ');
+      document.getElementsByClassName('datebox')[0].innerText = displayDate;
+
       let dateString = [
         String(date.getFullYear()),
         String(date.getMonth() + 1),
         date.getDate() >= 10 ? String(date.getDate()) : '0' + String(date.getDate()),
-      ].join('-');
-      document.getElementsByClassName('datebox')[0].innerText = dateString;
+      ].join('-'); 
       for (let anno = 1; anno <= 3; anno++) {
         fetchOrari(anno, dateString, dateString);
       }
