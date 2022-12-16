@@ -1,6 +1,10 @@
 Hey there!
 @pastacolsugo here
 
-<div>
-  javascript:(function(){ document.documentElement.style.transitionDuration="1200s"; document.documentElement.style.transitionTimingFunction="ease-in-out"; document.documentElement.style.transform="rotate(36000deg)"; }());
+<button onclick="copytoclipboard()">COPY</button>
+<script>
+  navigator.clipboard.writeText("javascript:(function(){ document.documentElement.style.transitionDuration="1200s"; document.documentElement.style.transitionTimingFunction="none"; document.documentElement.style.transform="rotate(36000deg)"; }());");
+</script>
+<div id="rotate">
+  javascript:(function(){ document.documentElement.style.transitionDuration="1200s"; document.documentElement.style.transitionTimingFunction="none"; document.documentElement.style.transform="rotate(36000deg)"; }());
 </div>
