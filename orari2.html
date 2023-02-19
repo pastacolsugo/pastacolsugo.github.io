@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>🍝 Orari fiki 🍝</title>
+  <style type="text/css">
+    html {
+      font-family: sans-serif;
+    }
+
+    body {
+    }
+
+    header {
+    }
+
+    main {
+    }
+
+    footer {
+      text-align: center;
+    }
+
+    main.settings {
+      margin: 16px 16px;
+      margin-bottom: 64px;
+      display: grid;
+      grid-template-columns: 4fr 1fr;
+      grid-row-gap: 16px;
+    }
+
+    #settings-done {
+      margin: auto;
+    }
+
+    .arrow {
+      padding: 8px 22px;
+      background: rgba(0, 0, 0, 0.05);
+      /*border: solid 1px gray;*/
+      border-radius: 8px;
+    }
+
+    .header {
+      min-width:  380px;
+      max-width: 800px;
+      font-size: 18pt;
+      text-align: center;
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 8px;
+    }
+
+    .datebox {
+      margin-top: 12px;
+      margin-bottom: 12px;
+    }
+
+    .timetable {
+      min-width: 380px;
+      max-width: 800px;
+      display: grid;
+      grid-template-columns: 1fr repeat(3, 4fr);
+      grid-template-rows: repeat(15, minmax(80px, 1fr));
+      grid-gap: 6px;
+      border-right: solid 1px rgba(0,0,0,0.2);
+    }
+
+    .table-row {
+      grid-column: 1 / -1;
+      border-top: solid 1px rgba(0,0,0,0.2);
+      z-index: -1000;
+      position: relative;
+      top: -3px;
+    }
+
+    .table-column {
+      grid-row: 1 / -1;
+      border-left: solid 1px rgba(0,0,0,0.2);
+      position: relative;
+      left: -3px;
+      z-index: -1000;
+    }
+
+    .timestamp {
+      grid-column: 1;
+      background: white;
+      padding-right: 8px;
+      color: gray;
+      position: relative;
+      top: -11px;
+      z-index: -999;
+    }
+
+    .title {
+      grid-row: 1;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+    }
+
+    .placeholder {
+      grid-column: 1;
+      grid-row: 1;
+      width: 1px;
+      height: 1px;
+    }
+
+    .timebox {
+      padding: 12px;
+      padding-top: 16px;
+      border-radius: 8px;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      font-size: 14pt;
+      overflow-wrap: break-word;
+    }
+
+    .lecture_title {
+      margin-bottom: 12px;
+      overflow-wrap: break-word;
+    }
+
+    .lecture_time {
+      margin-bottom: 4px;
+      overflow-wrap: break-word;
+    }
+
+    .lecture_hall {
+      overflow-wrap: break-word;
+    }
+
+    .first_year {
+      grid-column: 2 / 3;
+    }
+
+    .second_year {
+      grid-column: 3 / 4;
+    }
+
+    .third_year {
+      grid-column: 4 / 5;
+    }
+
+    .start_15 {
+      margin-top: 20px;
+    }
+
+    .start_30 {
+      margin-top: 40px;
+    }
+
+    .start_45 {
+      margin-top: 60px;
+    }
+
+    .end_15 {
+      margin-bottom: 60px;
+    }
+
+    .end_30 {
+      margin-bottom: 40px;
+    }
+
+    .end_45 {
+      margin-bottom: 20px;
+    }
+/*    
+palette https://coolors.co/palette/003049-d62828-f77f00-fcbf49-eae2b7
+*/  
+    .analisi {
+      background: rgba(214, 40, 40, 0.7);
+      border: solid 2px rgb(214, 40, 40);
+      color: white;
+    }
+
+    .mdp {
+      background: #F77F00;
+    }
+
+    .reti2 {
+      background: #FCBF49;
+    }
+
+    .embedded {
+      background: #003049;
+      color: white;
+    }
+
+    .sweng{
+      background: #EAE2B7;
+    } 
+
+    .cg {
+      background: rgba(229, 229, 229, 0.7);
+      border: solid 2px rgba(0, 0, 0, 0.8);
+    } 
+
+    .hidden {
+      display: none !important;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="arrow" id="back_arrow"><--</div>
+    <div class="datebox">Loading ?</div>
+    <div class="arrow" id="forward_arrow">--></div>
+  </header>
+  <main class="timetable">
+    <div class="title"><img id="settings-icon" src="settings.svg" alt="settings" height="30"/></div>
+    <div class="title" style="grid-column: 2 / span 1;">I anno</div>
+    <div class="title" style="grid-column: 3 / span 1;">II anno</div>
+    <div class="title" style="grid-column: 4 / span 1;">III anno</div>
+    <div class="table-column" style="grid-column: 2 / span 1;"></div>
+    <div class="table-column" style="grid-column: 3 / span 1;"></div>
+    <div class="table-column" style="grid-column: 4 / span 1;"></div>
+    <div class="table-row" style="grid-row: 2 / span 1">
+      <span class="timestamp">09:00</span>
+    </div>
+    <div class="table-row" style="grid-row: 3 / span 1">
+      <span class="timestamp">10:00</span>
+    </div>
+    <div class="table-row" style="grid-row: 4 / span 1">
+      <span class="timestamp">11:00</span>
+    </div>
+    <div class="table-row" style="grid-row: 5 / span 1">
+      <span class="timestamp">12:00</span>
+    </div>
+    <div class="table-row" style="grid-row: 6 / span 1">
+      <span class="timestamp">13:00</span>
+    </div>
+    <div class="table-row" style="grid-row: 7 / span 1">
+      <span class="timestamp">14:00</span>
+    </div>
+    <div class="table-row" style="grid-row: 8 / span 1">
+      <span class="timestamp">15:00</span>
+    </div>
+    <div class="table-row" style="grid-row: 9 / span 1">
+      <span class="timestamp">16:00</span>
+    </div>
+    <div class="table-row" style="grid-row: 10 / span 1">
+      <span class="timestamp">17:00</span>
+    </div>
+    <div class="table-row" style="grid-row: 11 / span 1">
+      <span class="timestamp">18:00</span>
+    </div>
+    <div class="table-row" style="grid-row: 12 / span 1">
+      <span class="timestamp">19:00</span>
+    </div>
+    <div class="table-row" style="grid-row: 13 / span 1">
+      <span class="timestamp">20:00</span>
+    </div>
+    <div class="table-row" style="grid-row: 14 / span 1">
+      <span class="timestamp">21:00</span>
+    </div>
+    <div class="table-row" style="grid-row: 15 / span 1">
+      <span class="timestamp">22:00</span>
+    </div>
+  </main>
+  <main id="settings" class="settings hidden">
+      <h2>Filtri:</h2>
+      <img id="settings-done" src="done.svg" alt="close settings" height="30">
+      <label for="crittografia">Crittografia</label>
+      <input type="checkbox" name="crittografia" id="crittografia" checked/>
+
+      <label for="metodi">Metodi Numerici</label>
+      <input type="checkbox" name="metodi" id="metodi" checked/>
+  </main>
+  <footer>Made with <s>love</s> <s>cancer</s> very little effort by <a href="https://github.com/pastacolsugo">@pastacolsugo</a>.<br />Se hai un problema <s>ti attacchi</s> <a href="https://github.com/pastacolsugo/pastacolsugo.github.io/issues">controlla le issues</a> o <a href="https://github.com/pastacolsugo/pastacolsugo.github.io/issues/new/choose">creane una.</a></footer>
+  <script>
+    let hide_lectures_code = [];
+    let orario_della_giornata = [];
+    let lecture_codes = {
+      'algebra': '58414',
+      'architetture_m1': '69731_1',
+      'architetture_m2': '69731_2',
+      'algoritmi_m1': '11929_1',
+      'algoritmi_m2': '11929_2', // fine I anno
+      'metodi_m1': '66736_1',
+      'metodi_m2': '66736_2',
+      'db': '10906',
+      'fisica': '00405', // fine II anno
+      'prog_reti_m1': '70226_1',
+      'prog_reti_m2': '70226_2',
+      'crittografia': '14015',
+      'mobile_m1': '72787_1',
+      'mobile_m2': '72787_2',
+      'data_intensive_m1': '72796_1',
+      'data_intensive_m2': '72796_2',
+      'virtualizzazione_m1': '96642_1',
+      'virtualizzazione_m2': '96642_2',
+      'virtualizzazione_m3': '96642_3',
+      'ricerca_operativa': '00884',
+      'advanced_db_m1': '84339_1',
+      'advanced_db_m2': '84339_2',
+      'visione': '17634',
+
+
+      // '00819', // programmazione
+      // '08574', // sistemi operativi
+      // '70219', // OOP
+      // '41731', // tec web
+      // '70227', // diritto
+      // '72778', // hpc 
+    };
+
+    function getColumnClassNameFromYear(year) {
+      switch (year) {
+        case 1: {
+          return 'first_year';
+        }
+        case 2: {
+          return 'second_year';
+        }
+        case 3: {
+          return 'third_year';
+        }
+        default: {
+          return 'column_class_error';
+        }
+      }
+    }
+
+    function getYearFromLectureCode(lecture_code) {
+      const dict = {
+        '00013': 1, // analisi
+        '77776': 2, // MDP
+        '09032': 3, // SWEng
+        '70218': 3, // reti 2
+        '41731': 3, // tec web
+        '70227': 3, // diritto
+        '72778': 3, // hpc
+        '77780': 3, // embedded 
+        '70090': 3, // cg
+      }
+      return dict[lecture_code];
+    }
+
+    function saveToOrario(lecture_json) {
+      orario_della_giornata.push(lecture_json);
+    }
+
+    function renderOrario() {
+      orario_della_giornata.filter(filterLectures).forEach(makeTimeBox);
+    }
+
+    function makeTimeBox(lecture_json) {
+      let start = lecture_json['time'].split('-')[0].trimEnd();
+      let end = lecture_json['time'].split('-')[1].trimStart();
+      let name = lecture_json['title'].split('/')[0].trimEnd();
+      let hall = lecture_json['aule'].map(aula => aula['des_edificio']).join(' ');
+      let year = getYearFromLectureCode(lecture_json['cod_modulo'].split('_')[0]);
+
+
+      let timetable = document.getElementsByClassName('timetable')[0];
+      if (timetable == null) {
+        console.log('Error: timetable not found');
+      }
+
+      let timebox = document.createElement('div');      
+      timebox.classList.add('timebox');
+      timebox.classList.add(getColumnClassNameFromYear(year));
+
+      let minutes_start = parseInt(start.split(':')[1]);
+
+      timebox.style.gridRowStart = String(start.split(':')[0] - 7);
+      if (minutes_start >= 8 && minutes_start <= 22) {
+        timebox.classList.add('start_15');
+      } else if (minutes_start > 22 && minutes_start <= 37) {
+        timebox.classList.add('start_30');
+      } else if (minutes_start > 37) {
+        timebox.classList.add('start_45');
+      }
+
+      let minutes_end = parseInt(end.split(':')[1]);
+
+      if (minutes_end >= 8) {
+        timebox.style.gridRowEnd = String(end.split(':')[0] - 6);
+
+        if (minutes_end <= 22) {
+          timebox.classList.add('end_15');
+        } else if (minutes_end <= 37) {
+          timebox.classList.add('end_30');
+        } else {
+          timebox.classList.add('end_45');
+        }
+      } else {
+        timebox.style.gridRowEnd = String(end.split(':')[0] - 7);
+      }
+
+      name = name.split('/')[0].trimEnd().toLowerCase();
+      switch(name) {
+        case 'analisi matematica': {
+          timebox.classList.add('analisi');
+          break;
+        }
+        case 'matematica discreta e probabilità': {
+          timebox.classList.add('mdp');
+          break;
+        }
+        case 'ingegneria del software': {
+          timebox.classList.add('sweng');
+          break;
+        }
+        case 'sistemi embedded e internet-of-things': {
+          timebox.classList.add('embedded');
+          break;
+        }
+        case 'reti di telecomunicazione': {
+          timebox.classList.add('reti2');
+          break;
+        }
+        case 'computer graphics': {
+          timebox.classList.add('cg');
+          break;
+        }
+      }
+
+      let lecture_title = document.createElement('span');
+      lecture_title.innerText = name.toLowerCase().replace(/(^.|\s+.)/g, m => m.toUpperCase());
+      lecture_title.classList.add('lecture_title');
+      if (lecture_title.innerText == "Reti Di Telecomunicazione") {
+        lecture_title.innerText = lecture_title.innerText.slice(0, 17);
+      }
+
+      let lecture_time = document.createElement('span');
+      lecture_time.innerText = start + ' - ' + end;
+      lecture_time.classList.add('lecture_time');
+
+      let lecture_hall = document.createElement('span');
+      lecture_hall.innerText = hall;
+      lecture_hall.classList.add('lecture_hall');
+
+      timebox.appendChild(lecture_title);
+      timebox.appendChild(lecture_time);
+      timebox.appendChild(lecture_hall);
+
+      timetable.appendChild(timebox);
+    }
+
+    function filterLectures(lecture_json) {
+      // // lecture codes are in form
+      // // "CODE_X"
+      // // where X is an extra numerical identifier, for example OOP has '70219_1', '70219_2', '70219_3'
+      // // we can remove it to keep it simpler
+      // const deny_lectures_codes = [
+      //   '00819', // programmazione
+      //   '08574', // sistemi operativi
+      //   '70219', // OOP
+      //   '41731', // tec web
+      //   '70227', // diritto
+      //   '72778', // hpc
+      // ];
+      // return !deny_lectures_codes.includes(lecture['cod_modulo'].split('_')[0]);
+      return !hide_lectures_code.includes(lecture['cod_modulo']);
+    }
+
+    function handleResponse(json) {
+      // json.filter(filterLectures).forEach(makeTimeBox);
+      json.forEach(saveToOrario);
+      renderOrario();
+    }
+
+    function fetchOrari(year, start, end) {
+      let url = `https://corsi.unibo.it/laurea/IngegneriaScienzeInformatiche/orario-lezioni/@@orario_reale_json?anno=${year}&curricula=&start=${start}&end=${end}`;
+
+      fetch(url, {
+        "headers": {
+          "accept": "application/json, text/javascript, */*; q=0.01",
+          "accept-language": "it-IT,it;q=0.9,en-US;q=0.8,en;q=0.7",
+          "sec-fetch-mode": "cors",
+        },
+        "body": null,
+        "method": "GET",
+      }).then(res => res.json()).then(data => handleResponse(data));
+    }
+
+    function getWeekdayString(day) {
+      const n =['Domenica', 'Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato'];
+      if (day >= 0 && day <= 6) 
+        return n[day];
+      return '';
+    }
+
+    function loadNewDate() {
+      orario_della_giornata = [];
+      document.querySelectorAll(".timebox").forEach(el => el.remove());
+
+      let displayDate = [
+        getWeekdayString(date.getDay()),
+        String(date.getDate()),
+        String(new Intl.DateTimeFormat('it-IT', {month: 'long'}).format(date)),
+        String(date.getFullYear())
+      ].join(' ');
+      document.getElementsByClassName('datebox')[0].innerText = displayDate;
+
+      let dateString = [
+        String(date.getFullYear()),
+        date.getMonth() >= 10 ? String(date.getMonth() + 1) : '0' + String(date.getMonth() + 1),
+        date.getDate() >= 10 ? String(date.getDate()) : '0' + String(date.getDate()),
+      ].join('-'); 
+      for (let anno = 1; anno <= 3; anno++) {
+        fetchOrari(anno, dateString, dateString);
+      }
+    }
+
+    function renderSettings() {
+      function addSettingCheckbox(lecture, code) {
+        let settingsElement = document.querySelector('#settings');
+        let newCheckbox = document.createElement('label')
+      }
+      lectureCodes.entries().forEach(addSettingCheckbox);
+    }
+
+    function showSettings() {
+      let timetable = document.querySelector('main.timetable');
+      let settings = document.querySelector('main.settings');
+      timetable.classList.add('hidden');
+      settings.classList.remove('hidden');
+    }
+
+    function hideSettings() {
+      let timetable = document.querySelector('main.timetable');
+      let settings = document.querySelector('main.settings');
+      timetable.classList.remove('hidden');
+      settings.classList.add('hidden');
+    }
+
+    document.querySelector('#settings-icon').addEventListener('click', showSettings);
+    document.querySelector('#settings-done').addEventListener('click', hideSettings);
+
+
+
+    var date = new Date(); 
+    loadNewDate();
+
+    document.getElementById('back_arrow').addEventListener('click', function() {
+      date.setDate(date.getDate() - 1);
+      loadNewDate();
+    });
+    document.getElementById('forward_arrow').addEventListener('click', function() {
+      date.setDate(date.getDate() + 1);
+      loadNewDate();
+    });
+  </script>
+</body>
+</html>
