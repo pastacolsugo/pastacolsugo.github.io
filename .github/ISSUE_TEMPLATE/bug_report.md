@@ -1,27 +1,27 @@
 ---
-name: Bug report
-about: Create a report to help us improve
+name: Segnala un problema
+about: Crea un bug report per aiutarmi a sistemare un problema
 title: ''
 labels: ''
 assignees: ''
 
 ---
 
-**Describe the bug**
-A clear and concise description of what the bug is.
+**Descrivi il problema**
+Una chiara e consisa descrizione del problema.
 
-**To Reproduce**
-Steps to reproduce the behavior:
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
+**Per riprodurlo**
+Azioni da compiere per ricreare il problema:
+1. Vai a '...'
+2. Clicca su '....'
+3. Fai '....'
+4. Vedi il problema
 
-**Expected behavior**
-A clear and concise description of what you expected to happen.
+**Comportamento atteso**
+Una chiara e concisa descrizione di cosa ti aspettavi succedesse.
 
 **Screenshots**
-If applicable, add screenshots to help explain your problem.
+Se è il caso, aggiungi degli screenshot per spiegare il problema.
 
 **Desktop (please complete the following information):**
  - OS: [e.g. iOS]
@@ -34,5 +34,6 @@ If applicable, add screenshots to help explain your problem.
  - Browser [e.g. stock browser, safari]
  - Version [e.g. 22]
 
-**Additional context**
-Add any other context about the problem here.
+**Informazioni aggiuntive**
+Aggiungi qui qualsiasi altra informazione sul problema.
+
