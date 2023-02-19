@@ -1,0 +1,174 @@
+    html {
+      font-family: sans-serif;
+    }
+
+    body {
+    }
+
+    header {
+    }
+
+    main {
+    }
+
+    footer {
+      text-align: center;
+    }
+
+    main.settings {
+      margin: 16px 16px;
+      margin-bottom: 64px;
+      display: grid;
+      grid-template-columns: 4fr 1fr;
+      grid-row-gap: 16px;
+    }
+
+    #settings-done {
+      margin: auto;
+    }
+
+.arrow {
+  padding: 8px 22px;
+  background: rgba(0, 0, 0, 0.05);
+  /*border: solid 1px gray;*/
+  border-radius: 8px;
+  margin-top: 4px;
+}
+
+.header {
+  min-width: 380px;
+  max-width: 800px;
+  font-size: 18pt;
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 8px;
+}
+
+.datebox {
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.timetable {
+  min-width: 380px;
+  max-width: 800px;
+  display: grid;
+  grid-template-columns: 1fr repeat(3, 4fr);
+  grid-template-rows: repeat(15, minmax(80px, 1fr));
+  grid-gap: 6px;
+  border-right: solid 1px rgba(0, 0, 0, 0.2);
+}
+
+.table-row {
+  grid-column: 1 / -1;
+  border-top: solid 1px rgba(0, 0, 0, 0.2);
+  z-index: -1000;
+  position: relative;
+  top: -3px;
+}
+
+.table-column {
+  grid-row: 1 / -1;
+  border-left: solid 1px rgba(0, 0, 0, 0.2);
+  position: relative;
+  left: -3px;
+  z-index: -1000;
+}
+
+.timestamp {
+  grid-column: 1;
+  background: white;
+  padding-right: 8px;
+  color: gray;
+  position: relative;
+  top: -11px;
+  z-index: -999;
+}
+
+.title {
+  grid-row: 1;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.placeholder {
+  grid-column: 1;
+  grid-row: 1;
+  width: 1px;
+  height: 1px;
+}
+
+.timebox {
+  padding: 12px;
+  padding-top: 16px;
+  border-radius: 8px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  font-size: 14pt;
+  overflow-wrap: break-word;
+  border: solid 2px gray;
+  background: rgba(255,255,255,0.8);
+}
+
+.lecture_title {
+  margin-bottom: 12px;
+  overflow-wrap: break-word;
+}
+
+.lecture_time {
+  margin-bottom: 4px;
+  overflow-wrap: break-word;
+}
+
+.lecture_hall {
+  overflow-wrap: break-word;
+}
+
+.first_year {
+  grid-column: 2 / 3;
+}
+
+.second_year {
+  grid-column: 3 / 4;
+}
+
+.third_year {
+  grid-column: 4 / 5;
+}
+
+.start_15 {
+  margin-top: 20px;
+}
+
+.start_30 {
+  margin-top: 40px;
+}
+
+.start_45 {
+  margin-top: 60px;
+}
+
+.end_15 {
+  margin-bottom: 60px;
+}
+
+.end_30 {
+  margin-bottom: 40px;
+}
+
+.end_45 {
+  margin-bottom: 20px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.light_gray_setting {
+  background: rgb(245, 245, 245);
+}
+

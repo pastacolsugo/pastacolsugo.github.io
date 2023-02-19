@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>🍝 Orari fiki 🍝</title>
+  <link rel="stylesheet" type="text/css" href="/main.css" />
+  <link rel="stylesheet" type="text/css" href="/lectures.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="arrow" id="back_arrow">←</div>
+    <div class="datebox">Loading ?</div>
+    <div class="arrow" id="forward_arrow">→</div>
+  </header>
+  <main class="timetable">
+    <div class="title"><img id="settings-icon" src="settings.svg" alt="settings" height="30"/></div>
+    <div class="title" style="grid-column: 2 / span 1;">I anno</div>
+    <div class="title" style="grid-column: 3 / span 1;">II anno</div>
+    <div class="title" style="grid-column: 4 / span 1;">III anno</div>
+    <div class="table-column" style="grid-column: 2 / span 1;"></div>
+    <div class="table-column" style="grid-column: 3 / span 1;"></div>
+    <div class="table-column" style="grid-column: 4 / span 1;"></div>
+    <div class="table-row" style="grid-row: 2 / span 1">
+      <span class="timestamp">09:00</span>
+    </div>
+    <div class="table-row" style="grid-row: 3 / span 1">
+      <span class="timestamp">10:00</span>
+    </div>
+    <div class="table-row" style="grid-row: 4 / span 1">
+      <span class="timestamp">11:00</span>
+    </div>
+    <div class="table-row" style="grid-row: 5 / span 1">
+      <span class="timestamp">12:00</span>
+    </div>
+    <div class="table-row" style="grid-row: 6 / span 1">
+      <span class="timestamp">13:00</span>
+    </div>
+    <div class="table-row" style="grid-row: 7 / span 1">
+      <span class="timestamp">14:00</span>
+    </div>
+    <div class="table-row" style="grid-row: 8 / span 1">
+      <span class="timestamp">15:00</span>
+    </div>
+    <div class="table-row" style="grid-row: 9 / span 1">
+      <span class="timestamp">16:00</span>
+    </div>
+    <div class="table-row" style="grid-row: 10 / span 1">
+      <span class="timestamp">17:00</span>
+    </div>
+    <div class="table-row" style="grid-row: 11 / span 1">
+      <span class="timestamp">18:00</span>
+    </div>
+    <div class="table-row" style="grid-row: 12 / span 1">
+      <span class="timestamp">19:00</span>
+    </div>
+    <div class="table-row" style="grid-row: 13 / span 1">
+      <span class="timestamp">20:00</span>
+    </div>
+    <div class="table-row" style="grid-row: 14 / span 1">
+      <span class="timestamp">21:00</span>
+    </div>
+    <div class="table-row" style="grid-row: 15 / span 1">
+      <span class="timestamp">22:00</span>
+    </div>
+  </main>
+  <main id="settings" class="settings hidden">
+      <p>NB: alcune lezioni divise per gruppi (eg: algoritmi, architetture) non vengono rappresentate bene.</p>
+      <h2>Filtri:</h2>
+      <img id="settings-done" src="done.svg" alt="close settings" height="30">
+  </main>
+  <footer>Made with <s>love</s> <s>cancer</s> very little effort by <a href="https://github.com/pastacolsugo">@pastacolsugo</a>.<br />Se hai un problema <s>ti attacchi</s> <a href="https://github.com/pastacolsugo/pastacolsugo.github.io/issues">controlla le issues</a> o <a href="https://github.com/pastacolsugo/pastacolsugo.github.io/issues/new/choose">creane una.</a></footer>
+  <script type="text/javascript" src="orari.js"></script>
+</body>
+</html>
