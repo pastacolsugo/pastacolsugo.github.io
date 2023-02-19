@@ -260,11 +260,20 @@ palette https://coolors.co/palette/003049-d62828-f77f00-fcbf49-eae2b7
         '72778': 3, // hpc
         '77780': 3, // embedded 
         '70090': 3, // cg
+        '58414': 1, // algebra
+        '66736': 2, // metodi
+        '10906': 2, // db
+        '00405': 2, // fisica
+        '70226': 2, // prog reti
+        '14015': 3, // critto
+        '72787': 3, // mobile
+        '00884': 3, // ricerca operativa
       }
       return dict[lecture_code];
     }
 
     function makeTimeBox(lecture_json) {
+      console.log('Making time box: ', lecture_json);
       let start = lecture_json['time'].split('-')[0].trimEnd();
       let end = lecture_json['time'].split('-')[1].trimStart();
       let name = lecture_json['title'].split('/')[0].trimEnd();
@@ -378,6 +387,12 @@ palette https://coolors.co/palette/003049-d62828-f77f00-fcbf49-eae2b7
       '41731', // tec web
       '70227', // diritto
       '72778', // hpc
+      '69731', // architetture
+      '11929', // algoritmi
+      '72796', // data intensive
+      '96642', // virtualizzazione
+      '84339', // advanced db
+      '17634'
       ];
       return !deny_lectures_codes.includes(lecture['cod_modulo'].split('_')[0]);
     }
@@ -420,7 +435,7 @@ palette https://coolors.co/palette/003049-d62828-f77f00-fcbf49-eae2b7
 
       let dateString = [
         String(date.getFullYear()),
-        date.getMonth() >= 10 ? String(date.getMonth() + 1) : '0' + String(date.getMonth()),
+        date.getMonth() >= 10 ? String(date.getMonth() + 1) : '0' + String(date.getMonth() + 1),
         date.getDate() >= 10 ? String(date.getDate()) : '0' + String(date.getDate()),
       ].join('-'); 
       for (let anno = 1; anno <= 3; anno++) {
