@@ -282,9 +282,9 @@ palette https://coolors.co/palette/003049-d62828-f77f00-fcbf49-eae2b7
       'metodi_m1': '66736_1',
       'metodi_m2': '66736_2',
       'db': '10906',
-      'fisica': '00405', // fine II anno
+      'fisica': '00405', 
       'prog_reti_m1': '70226_1',
-      'prog_reti_m2': '70226_2',
+      'prog_reti_m2': '70226_2', // fine II anno
       'crittografia': '14015',
       'mobile_m1': '72787_1',
       'mobile_m2': '72787_2',
@@ -455,7 +455,7 @@ palette https://coolors.co/palette/003049-d62828-f77f00-fcbf49-eae2b7
       //   '72778', // hpc
       // ];
       // return !deny_lectures_codes.includes(lecture['cod_modulo'].split('_')[0]);
-      return !hide_lectures_code.includes(lecture['cod_modulo']);
+      return !hide_lectures_code.includes(lecture_json['cod_modulo']);
     }
 
     function handleResponse(json) {
