@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>🍝 Orari fiki 🍝</title>
-  <link rel="stylesheet" type="text/css" href="/main.css" />
-  <link rel="stylesheet" type="text/css" href="/lectures.css" />
+  <link rel="stylesheet" type="text/css" href="main.css" />
+  <link rel="stylesheet" type="text/css" href="lectures.css" />
 </head>
 <body>
   <header class="header">
@@ -65,9 +65,16 @@
     </div>
   </main>
   <main id="settings" class="settings hidden">
-      <p>NB: alcune lezioni divise per gruppi (eg: algoritmi, architetture) non vengono rappresentate bene.</p>
-      <h2>Filtri:</h2>
+      <h1>Impostazioni</h1>
       <img id="settings-done" src="done.svg" alt="close settings" height="30">
+      <div style="grid-column: 1 / span 2; display: grid; grid-template-columns: 1fr 1fr 1fr; grid-template-rows: 1fr 1fr; text-align: center;">
+        <span style="grid-column: 1 / -1;">Salva questa pagina nella home del tuo telefono!</span>
+        <!-- <a href="chrome.jpeg">Chrome</a>
+        <a href="firefox.jpeg">Firefox</a>
+        <a href="https://support.apple.com/it-it/guide/iphone/iph42ab2f3a7/ios#:~:text=utente%20di%20iCloud.-,Aggiungere%20l%27icona%20di%20un%20sito%20web%20alla%20schermata%20Home,-Puoi%20aggiungere%20l%27icona">Safari</a> -->
+      </div>
+      <h2 style="grid-column: 1 / span 2;">Filtri:</h2>
+      <!-- <p style="grid-column: 1 / span 2; color: gray; font-style: italic; margin: 0;">I filtri vengono salvati in localstorage.</p> -->
   </main>
   <footer>Made with <s>love</s> <s>cancer</s> very little effort by <a href="https://github.com/pastacolsugo">@pastacolsugo</a>.<br />Se hai un problema <s>ti attacchi</s> <a href="https://github.com/pastacolsugo/pastacolsugo.github.io/issues">controlla le issues</a> o <a href="https://github.com/pastacolsugo/pastacolsugo.github.io/issues/new/choose">creane una.</a></footer>
   <script type="text/javascript" src="orari.js"></script>
