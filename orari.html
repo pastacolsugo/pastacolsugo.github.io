@@ -145,33 +145,46 @@
 /*    
 palette https://coolors.co/palette/003049-d62828-f77f00-fcbf49-eae2b7
 */  
-    .analisi {
+    .analisi, .aeg {
       background: rgba(214, 40, 40, 0.7);
       border: solid 2px rgb(214, 40, 40);
       color: white;
     }
 
-    .mdp {
+    .mdp, .metodi {
       background: #F77F00;
     }
 
-    .reti2 {
+    .reti2, .reti1{
       background: #FCBF49;
     }
 
-    .embedded {
+    .embedded, .mobile {
       background: #003049;
       color: white;
     }
 
-    .sweng{
+    .sweng, .critto {
       background: #EAE2B7;
     } 
 
-    .cg {
+    .cg, .fisica{
       background: rgba(229, 229, 229, 0.7);
       border: solid 2px rgba(0, 0, 0, 0.8);
     } 
+
+    .db {
+      background: rgba(107, 44, 57, 0.7); 
+      border: solid 2px rgb(107, 44, 57);
+      color: white;
+    }
+
+    .ric-op {
+      background: rgba(0, 27, 41, 0.7);
+      border: solid 2px rgb(0, 27, 41);
+      color: white;
+    }
+
   </style>
 </head>
 <body>
@@ -261,10 +274,10 @@ palette https://coolors.co/palette/003049-d62828-f77f00-fcbf49-eae2b7
         '77780': 3, // embedded 
         '70090': 3, // cg
         '58414': 1, // algebra
-        '66736': 2, // metodi
         '10906': 2, // db
         '00405': 2, // fisica
         '70226': 2, // prog reti
+        '66736': 2, // metodi
         '14015': 3, // critto
         '72787': 3, // mobile
         '00884': 3, // ricerca operativa
@@ -319,6 +332,26 @@ palette https://coolors.co/palette/003049-d62828-f77f00-fcbf49-eae2b7
 
       name = name.split('/')[0].trimEnd().toLowerCase();
       switch(name) {
+        case 'algebra e geometria': {
+          timebox.classList.add('aeg');
+          break;
+        }
+        case 'metodi numerici': {
+          timebox.classList.add('metodi');
+          break;
+        }
+        case 'basi di dati': {
+          timebox.classList.add('db');
+          break;
+        }
+        case 'crittografia': {
+          timebox.classList.add('critto');
+          break;
+        }
+        case 'programmazione di sistemi mobile': {
+          timebox.classList.add('mobile');
+          break;
+        }
         case 'analisi matematica': {
           timebox.classList.add('analisi');
           break;
@@ -335,12 +368,24 @@ palette https://coolors.co/palette/003049-d62828-f77f00-fcbf49-eae2b7
           timebox.classList.add('embedded');
           break;
         }
+        case 'programmazione di reti': {
+          timebox.classList.add('reti1');
+          break;
+        }
         case 'reti di telecomunicazione': {
           timebox.classList.add('reti2');
           break;
         }
         case 'computer graphics': {
           timebox.classList.add('cg');
+          break;
+        }
+        case 'ricerca operativa': {
+          timebox.classList.add('ric-op');
+          break;
+        }
+        case 'fisica': {
+          timebox.classList.add('fisica');
           break;
         }
       }
@@ -392,7 +437,9 @@ palette https://coolors.co/palette/003049-d62828-f77f00-fcbf49-eae2b7
       '72796', // data intensive
       '96642', // virtualizzazione
       '84339', // advanced db
-      '17634'
+      '17634', // visione
+      '70227', // diritto
+      '72778', // hpc
       ];
       return !deny_lectures_codes.includes(lecture['cod_modulo'].split('_')[0]);
     }
