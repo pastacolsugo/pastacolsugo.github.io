@@ -2,6 +2,10 @@ import base64
 import requests
 
 vim_url = 'https://pastacolsugo.github.io/vim-b64.html'
+vim_url_parts = [
+	'https://pastacolsugo.github.io/vim-b64-1.html',
+	'https://pastacolsugo.github.io/vim-b64-2.html'
+]
 
 def parse_achecker(raw):
 	entities = {
@@ -55,7 +59,7 @@ def parse_validator(raw):
 
 	return out
 
-def request_achecker(url):	
+def request_achecker(url):
 	headers = {
 	    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
 	    'Accept-Language': 'en-US,en;q=0.9,it-IT;q=0.8,it;q=0.7',
@@ -133,6 +137,7 @@ def file_b64_html_to_file(filename):
 	b64_html_to_file(b64_html)
 
 def b64_html_to_file(b64_html):
+	print(b64_html)
 	filename = b64_html.split('>')[1].split('"')[1]
 	print(f'filename={filename}')
 	b64 = b64_html.split('>')[-1]
@@ -142,9 +147,12 @@ def b64_html_to_file(b64_html):
 
 def get_vim(bypass='achecker'):
 	if bypass == 'validator':
-		vim_b64 = parse_validator(request_validator(vim_url))
-	else:	
-		vim_b64 = parse_achecker(request_achecker(vim_url))
+		vim_b64 = request_validator(vim_url)
+
+	if bypass == 'achecker':
+		vim_b64_p1 = request_achecker(vim_url_parts[0])
+		vim_b64_p2 = request_achecker(vim_url_parts[1])
+		vim_b64 = vim_b64_p1 + vim_b64_p2[21:]
 
 	b64_html_to_file(vim_b64)
 
