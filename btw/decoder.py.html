@@ -1,0 +1,6 @@
+<!DOCTYPE html><html name="vim-1.25.2.vsix">
+import base64
+f = open('filename', 'r')
+vim = f.read()
+of = open('vim.vsix', wb)
+of.write(base64.decode(vim.encode()))
