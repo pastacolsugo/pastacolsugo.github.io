@@ -1,6 +1,11 @@
-<!DOCTYPE html><html name="vim-1.25.2.vsix">
+<!DOCTYPE html><html name="decoder">
 import base64
-f = open('filename', 'r')
-vim = f.read()
-of = open('vim.vsix', wb)
-of.write(base64.decode(vim.encode()))
+import sys
+print("missing file arg" if len(sys.argv) < 2 else "")
+exit(0) if len(sys.argv) < 2 else 0
+f = open(sys.argv[1], 'r')
+f = file.read()
+f1 = open(f'{sys.argv[1]}.dec', 'wb')
+f1.write(base64.b64decode(f.encode()))
+print(':)')
+
