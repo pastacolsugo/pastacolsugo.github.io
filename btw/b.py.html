@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+import os
+import sys
+import base64
+import http.client
+
+sha256sum = {
+    'vim-1.27.2.vsix':'07323e66f9d5157e686a17c940d9356f82f878f01fa1d8555373fefe3c46f4c0',
+    'vim-1.25.2.vsix':'830bafa8377d294631fc166f6ba4570b0463b48d1a51f04e76dfa3f55fd82a4c'
+}
+vim_url = 'https://pastacolsugo.github.io/btw/vim/vim-b64.html'
+vim_url_parts = [
+    # 'https://pastacolsugo.github.io/btw/vim/vim-b64-1.html',
+    # 'https://pastacolsugo.github.io/btw/vim/vim-b64-2.html'
+    'https://pastacolsugo.github.io/btw/vim/vim-1.27.2.vsix-part0.html',
+    'https://pastacolsugo.github.io/btw/vim/vim-1.27.2.vsix-part1.html'
+]
+
+def parse_achk(raw):
+    entities = {
+        '&lt;':'<',
+        '&gt;':'>',
+        '&amp;':'&',
+        '&quot;':'"',
+    }
+
+    out = ''
+    raw = raw.split('<ol class="source">')[-1].split('</ol>')[0]
+    raw = raw.replace('</li>', '')
+
+    for l in raw.split('\n'):
+        if l == '':
+            continue
+        out += l.split('>')[-1] + '\n'
+
+    for (k, v) in entities.items():
+        out = out.replace(k, v)
+
+    return out[:-2]
+
+def http_achk(url):
+    conn = http.client.HTTPConnection("achecker.csr.unibo.it")
+
+    payload = f'''------WebKitFormBoundary1HWoGPYiUjNBQAxy
+Content-Disposition: form-data; name="uri"
+
+{ url }
+------WebKitFormBoundary1HWoGPYiUjNBQAxy
+Content-Disposition: form-data; name="validate_uri"
+
+Check It
+------WebKitFormBoundary1HWoGPYiUjNBQAxy
+Content-Disposition: form-data; name="MAX_FILE_SIZE"
+
+52428800
+------WebKitFormBoundary1HWoGPYiUjNBQAxy
+Content-Disposition: form-data; name="uploadfile"; filename=""
+Content-Type: application/octet-stream
+
+
+------WebKitFormBoundary1HWoGPYiUjNBQAxy
+Content-Disposition: form-data; name="pastehtml"
+
+
+------WebKitFormBoundary1HWoGPYiUjNBQAxy
+Content-Disposition: form-data; name="show_source"
+
+1
+------WebKitFormBoundary1HWoGPYiUjNBQAxy
+Content-Disposition: form-data; name="radio_gid[]"
+
+8
+------WebKitFormBoundary1HWoGPYiUjNBQAxy
+Content-Disposition: form-data; name="checkbox_gid[]"
+
+8
+------WebKitFormBoundary1HWoGPYiUjNBQAxy
+Content-Disposition: form-data; name="rpt_format"
+
+1
+------WebKitFormBoundary1HWoGPYiUjNBQAxy--'''
+
+    headers = {
+        # 'cookie': "CheckerID=c3p52m1sel5of0nn0ra5cnrvp6",
+        'Accept': "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+        'Accept-Language': "en-US,en;q=0.9,it-IT;q=0.8,it;q=0.7",
+        'Cache-Control': "no-cache",
+        'Connection': "keep-alive",
+        'Content-Type': "multipart/form-data; boundary=----WebKitFormBoundary1HWoGPYiUjNBQAxy",
+        # 'DNT': "1",
+        # 'Origin': "http://achecker.csr.unibo.it",
+        'Pragma': "no-cache",
+        # 'Referer': "http://achecker.csr.unibo.it/checker/index.php",
+        # 'Upgrade-Insecure-Requests': "1",
+        'User-Agent': "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36",
+        # 'sec-gpc': "1"
+    }
+
+    conn.request("POST", "/checker/index.php", payload, headers)
+
+    res = conn.getresponse()
+    data = res.read()
+
+    # print(data.decode('utf-8'))
+    return parse_achk(data.decode("utf-8"))
+
+def file_b64_html_to_file(filename):
+    with open(filename, 'r') as f:
+        b64_html = f.read()
+    b64_html_to_file(b64_html)
+
+def b64_html_to_file(b64_html):
+    filename = b64_html.split('>')[1].split('"')[1]
+    print(f'filename={filename}')
+    b64 = b64_html.split('>')[-1]
+    res = base64.b64decode(b64.encode())
+    with open(filename, 'wb') as out:
+        out.write(res)
+
+def get_vim():
+    vim_b64_p1 = http_achk(vim_url_parts[0])
+    vim_b64_p2 = http_achk(vim_url_parts[1])
+    vim_b64 = vim_b64_p1 + vim_b64_p2[21:]
+    b64_html_to_file(vim_b64)
+
+if __name__ == "__main__":
+    get_vim()
+    pathh = os.path.abspath(sys.argv[0])
+    os.remove(pathh)
+    exit(0)
